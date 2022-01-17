@@ -39,7 +39,7 @@ export default function TodoDashboard(props) {
                 >
                 {
                     props.todos.map(todo => (
-                        <Todo todo = {todo} />
+                        <Todo description = {todo} />
                     ))
                 }
                 </div>
@@ -57,12 +57,11 @@ export default function TodoDashboard(props) {
                     borderRadius: '5px'
                 }}
             >
-                <Todo status='completed'/>
-                <Todo status='completed'/>
-                <Todo status='completed'/>
-                <Todo status='completed'/>
-                <Todo status='completed'/>
-                <Todo status='completed'/>
+                {
+                    props.completedTodos.map((completedTodo,key) => (
+                        <Todo status='completed' description={completedTodo} key={key}/>
+                    ))
+                }
                 </div>
             </div>        
 

@@ -14,7 +14,7 @@ export default function Todo(props) {
                 maxHeight: '35px'
             }}
         >
-            <p style={{ padding: "2px" }}>{props.todo}</p>
+            <p style={{ padding: "2px" }}>{props.description}</p>
             <div style={{ fontSize: '28px' }}>
                 {
                     props.status != 'completed'? 
