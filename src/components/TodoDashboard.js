@@ -23,6 +23,7 @@ export default function TodoDashboard(props) {
             </div>
             <div style={{
                     maxHeight: '40%',
+                    minWidth: '300px',
                     width: '100%',
                     marginBottom: '10px'
                 }}
@@ -37,19 +38,24 @@ export default function TodoDashboard(props) {
                     borderRadius: '5px'
                     }}
                 >
-                {
-                    props.todos.map((todo,key) => (
-                        <Todo description = {todo} key={key}/>
+                {   props.todos.length === 0 ? 
+                        <div>No Tasks are left.</div>
+                    :
+                    props.todos.map((todo,index) => (
+                        <Todo description = {todo} key={index} index={index} handleDelete = {props.handleDelete}/>
                     ))
                 }
                 </div>
             </div>
             <div style={{
-                    maxHeight: '40%'
+                    maxHeight: '40%',
+                    minWidth: '300px',
+                    width: '100%'
                 }}
             >
                 <h3>Completed: </h3>
                 <div style={{
+                    minHeight: '40%',
                     maxHeight: '80%',
                     overflowY: 'scroll',
                     padding: '2px',
@@ -57,10 +63,12 @@ export default function TodoDashboard(props) {
                     borderRadius: '5px'
                 }}
             >
-                {
-                    props.completedTodos.map((completedTodo,key) => (
-                        <Todo status='completed' description={completedTodo} key={key}/>
-                    ))
+                {   props.completedTodos.length === 0 ? 
+                        <div>None of the Task is completed.</div>
+                    :
+                        props.completedTodos.map((completedTodo,index) => (
+                            <Todo status='completed' description={completedTodo} key={index} index={index} handleDelete={props.handleDelete}/>
+                        ))
                 }
                 </div>
             </div>        

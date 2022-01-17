@@ -22,7 +22,7 @@ export default function Todo(props) {
                     :
                         <TiTick style={{ color: 'lightgreen', margin: '0 3px', pointerEvents: 'none'}} />
                 }
-                <TiDelete style={{ color: 'red', margin: '0 3px' }}/>
+                <TiDelete onClick={()=>props.handleDelete(props.index,props.status)} style={{ color: 'red', margin: '0 3px', cursor: 'pointer' }}/>
             </div>
         </div>
     )
