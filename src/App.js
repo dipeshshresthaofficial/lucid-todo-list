@@ -5,6 +5,12 @@ import TodoDashboard from './components/TodoDashboard.js';
 
 function App() {
   const [todo, setTodo] = useState(['This is my 3rd task.','This is my 4th task.']);
+  const [newTodo, setNewTodo] = useState('');
+  const handleAddNewTodo = ()=>{
+    const newTodoList = [newTodo,...todo];
+    setNewTodo('');
+    setTodo(newTodoList);
+  }
   return (
     <div style={{
         width: '100%',
@@ -12,7 +18,7 @@ function App() {
         justifyContent: 'center'
       }}
     >
-      <TodoDashboard todos = {todo}/>
+      <TodoDashboard todos = {todo} newTodo={newTodo} setNewTodo = {setNewTodo} handleAddNewTodo = {handleAddNewTodo}/>
     </div>
   );
 }
