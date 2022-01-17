@@ -18,7 +18,7 @@ export default function Todo(props) {
             <div style={{ fontSize: '28px' }}>
                 {
                     props.status != 'completed'? 
-                        <TiTick style={{ color: 'green', margin: '0 3px' }} />
+                        <TiTick onClick={()=>props.handleCompletedTodo(props.index,props.description)} style={{ color: 'green', margin: '0 3px', cursor: 'pointer' }} />
                     :
                         <TiTick style={{ color: 'lightgreen', margin: '0 3px', pointerEvents: 'none'}} />
                 }

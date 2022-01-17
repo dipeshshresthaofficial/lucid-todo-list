@@ -26,6 +26,13 @@ function App() {
       setTodo(newTodoList);
     }
   }
+  const handleCompletedTodo = (key,todoDescription)=>{
+    const newTodoList = todo.filter((item,index)=>(
+      key!==index
+    ));
+    setTodo(newTodoList);
+    setCompletedTodo([todoDescription,...completedTodo]);
+  }
   return (
     <div style={{
         width: '100%',
@@ -33,7 +40,7 @@ function App() {
         justifyContent: 'center'
       }}
     >
-      <TodoDashboard todos = {todo} newTodo={newTodo} setNewTodo = {setNewTodo} completedTodos={completedTodo} handleAddNewTodo = {handleAddNewTodo} handleDelete = {handleDelete}/>
+      <TodoDashboard todos = {todo} newTodo={newTodo} setNewTodo = {setNewTodo} completedTodos={completedTodo} handleAddNewTodo = {handleAddNewTodo} handleDelete = {handleDelete} handleCompletedTodo={handleCompletedTodo}/>
     </div>
   );
 }
