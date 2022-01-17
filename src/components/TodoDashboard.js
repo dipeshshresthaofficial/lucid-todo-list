@@ -19,7 +19,7 @@ export default function TodoDashboard(props) {
                     width: '100%',
                 }}
             >
-                <TodoAdd newTodo = {props.newTodo} setNewTodo = {props.setNewTodo} handleAddNewTodo={props.handleAddNewTodo}/>
+                <TodoAdd newTodo = {props.newTodo} setNewTodo = {props.setNewTodo} handleAddNewTodo={props.handleAddNewTodo} />
             </div>
             <div style={{
                     maxHeight: '40%',
@@ -38,8 +38,8 @@ export default function TodoDashboard(props) {
                     }}
                 >
                 {
-                    props.todos.map((todo,key) => (
-                        <Todo todo = {todo} key={key}/>
+                    props.todos.map((todo,index) => (
+                        <Todo description = {todo} key={index} index={index} handleCompletedTodo={props.handleCompletedTodo}/>
                     ))
                 }
                 </div>

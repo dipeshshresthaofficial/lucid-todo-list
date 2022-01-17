@@ -12,6 +12,14 @@ function App() {
     setTodo(newTodoList);
   }
   const [completedTodo, setCompletedTodo] = useState(['This is my 1st task.','This is my 2nd task.']);
+
+  const handleCompletedTodo = (key,todoDescription)=>{
+    const newTodoList = todo.filter((item,index)=>(
+      key!==index
+    ));
+    setTodo(newTodoList);
+    setCompletedTodo([todoDescription,...completedTodo]);
+  }
   return (
     <div style={{
         width: '100%',
@@ -19,7 +27,7 @@ function App() {
         justifyContent: 'center'
       }}
     >
-      <TodoDashboard todos = {todo} newTodo={newTodo} setNewTodo = {setNewTodo} completedTodos={completedTodo} handleAddNewTodo = {handleAddNewTodo}/>
+      <TodoDashboard todos = {todo} newTodo={newTodo} setNewTodo = {setNewTodo} completedTodos={completedTodo} handleAddNewTodo = {handleAddNewTodo} handleCompletedTodo={handleCompletedTodo}/>
     </div>
   );
 }
