@@ -19,7 +19,7 @@ function App() {
         justifyContent: 'center'
       }}
     >
-      <TodoDashboard todos = {todo} newTodo={newTodo} setNewTodo = {setNewTodo} handleAddNewTodo = {handleAddNewTodo}/>
+      <TodoDashboard todos = {todo} newTodo={newTodo} setNewTodo = {setNewTodo} completedTodos={completedTodo} handleAddNewTodo = {handleAddNewTodo}/>
     </div>
   );
 }

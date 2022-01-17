@@ -39,7 +39,7 @@ export default function TodoDashboard(props) {
                 >
                 {
                     props.todos.map((todo,key) => (
-                        <Todo todo = {todo} key={key}/>
+                        <Todo description = {todo} key={key}/>
                     ))
                 }
                 </div>
