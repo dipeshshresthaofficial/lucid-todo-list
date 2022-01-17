@@ -11,6 +11,7 @@ function App() {
     setNewTodo('');
     setTodo(newTodoList);
   }
+  const [completedTodo, setCompletedTodo] = useState(['This is my 1st task.','This is my 2nd task.']);
   return (
     <div style={{
         width: '100%',
