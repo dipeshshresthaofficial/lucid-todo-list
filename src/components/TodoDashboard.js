@@ -21,6 +21,7 @@ export default function TodoDashboard(props) {
             >
                 <TodoAdd newTodo = {props.newTodo} setNewTodo = {props.setNewTodo} handleAddNewTodo={props.handleAddNewTodo} />
             </div>
+            
             <div style={{
                     maxHeight: '40%',
                     minWidth: '300px',
@@ -41,9 +42,11 @@ export default function TodoDashboard(props) {
                 {   props.todos.length === 0 ? 
                         <div>No Tasks are left.</div>
                     :
-                    props.todos.map((todo,index) => (
-                        <Todo description = {todo} key={index} index={index} handleDelete = {props.handleDelete} handleCompletedTodo={props.handleCompletedTodo}/>
-                    ))
+                        props.todos.map((todo,index) => {
+                            if(!todo.isCompleted){
+                                return <Todo todo = {todo} key={index} handleDelete = {props.handleDelete} handleCompletedTodo={props.handleCompletedTodo}/>
+                            }
+                        })
                 }
                 </div>
             </div>
@@ -63,12 +66,14 @@ export default function TodoDashboard(props) {
                     borderRadius: '5px'
                 }}
             >
-                {   props.completedTodos.length === 0 ? 
-                        <div>None of the Task is completed.</div>
+                {   props.todos.length === 0 ? 
+                        <div>No Tasks are left.</div>
                     :
-                        props.completedTodos.map((completedTodo,index) => (
-                            <Todo status='completed' description={completedTodo} key={index} index={index} handleDelete={props.handleDelete}/>
-                        ))
+                        props.todos.map((todo,index) => {
+                            if(todo.isCompleted){
+                                return <Todo todo = {todo} key={index} handleDelete = {props.handleDelete} handleCompletedTodo={props.handleCompletedTodo}/>
+                            }
+                        })
                 }
                 </div>
             </div>        

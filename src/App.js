@@ -1,37 +1,28 @@
 import React,{useState} from 'react';
+import { connect } from 'react-redux';
+import { createTodo, removeTodo, completeTodo } from './redux/actions';
 import './App.css';
 
 import TodoDashboard from './components/TodoDashboard.js';
 
-function App() {
+function App({todos, onAddingNewTodo, onRemovingTodo, onCompletingTodo}) {
   const [todo, setTodo] = useState(['This is my 3rd task.','This is my 4th task.']);
   const [newTodo, setNewTodo] = useState('');
-  const [completedTodo, setCompletedTodo] = useState(['This is my 1st task.','This is my 2nd task.']);
-  const handleAddNewTodo = ()=>{
-    const newTodoList = [newTodo,...todo];
+  const [completedTodo, setCompletedTodo] = useState([]);
+  const handleAddNewTodo = (id)=>{
+    onAddingNewTodo(id,newTodo);
     setNewTodo('');
-    setTodo(newTodoList);
   }
-  const handleDelete = (key, status) =>{
-    console.log(status)
-    if(status==='completed'){
-      const newCompletedTodoList = completedTodo.filter((item,index) =>(
-        key!==index
-      ))
-      setCompletedTodo(newCompletedTodoList);
-    }else{
-      const newTodoList = todo.filter((item,index) =>(
-        key!==index
-      ))
-      setTodo(newTodoList);
-    }
+  const handleDelete = id =>{
+    onRemovingTodo(id);
   }
-  const handleCompletedTodo = (key,todoDescription)=>{
-    const newTodoList = todo.filter((item,index)=>(
-      key!==index
-    ));
-    setTodo(newTodoList);
-    setCompletedTodo([todoDescription,...completedTodo]);
+  const handleCompletedTodo = (id)=>{
+    // const newTodoList = todo.filter((item,index)=>(
+    //   key!==index
+    // ));
+    // setTodo(newTodoList);
+    // setCompletedTodo([todoDescription,...completedTodo]);
+    onCompletingTodo(id);
   }
   return (
     <div style={{
@@ -40,9 +31,18 @@ function App() {
         justifyContent: 'center'
       }}
     >
-      <TodoDashboard todos = {todo} newTodo={newTodo} setNewTodo = {setNewTodo} completedTodos={completedTodo} handleAddNewTodo = {handleAddNewTodo} handleDelete = {handleDelete} handleCompletedTodo={handleCompletedTodo}/>
+      <TodoDashboard todos = {todos} newTodo={newTodo} setNewTodo = {setNewTodo} completedTodos={completedTodo} handleAddNewTodo = {handleAddNewTodo} handleDelete = {handleDelete} handleCompletedTodo={handleCompletedTodo}/>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  todos: state.todos
+})
+
+const mapDispatchToProps = dispatch => ({
+  onAddingNewTodo: (id,description)=>dispatch(createTodo(id,description)),
+  onRemovingTodo: (id)=>dispatch(removeTodo(id)),
+  onCompletingTodo: id => dispatch(completeTodo(id))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(App);
