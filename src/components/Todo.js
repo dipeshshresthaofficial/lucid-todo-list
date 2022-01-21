@@ -23,7 +23,7 @@ export default function Todo(props) {
                     :
                         <TiTick style={{ color: 'lightgreen', margin: '0 3px', pointerEvents: 'none'}} />
                 }
-                <TiDelete onClick={()=>props.handleDelete(props.todo.id)} style={{ color: 'red', margin: '0 3px', cursor: 'pointer' }}/>
+                <TiDelete onClick={()=>props.handleDeleteTodo(props.todo.id)} style={{ color: 'red', margin: '0 3px', cursor: 'pointer' }}/>
             </div>
         </div>
     )
