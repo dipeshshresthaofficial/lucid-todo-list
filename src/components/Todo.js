@@ -2,7 +2,6 @@ import React from 'react';
 import {TiTick,TiDelete} from 'react-icons/ti';
 
 export default function Todo(props) {
-    console.log("dkjlfjslkj",props.todo.description);
     return (
         <div style={{ 
                 display: 'flex', 
@@ -16,7 +15,7 @@ export default function Todo(props) {
             }}
         >
             <p style={{ padding: "2px" }}>{props.todo.description}</p>
-            <div style={{ fontSize: '28px' }}>
+            <div style={{ fontSize: '28px'}}>
                 {
                     !props.todo.isCompleted? 
                         <TiTick onClick={()=>props.handleCompletedTodo(props.todo.id)} style={{ color: 'green', margin: '0 3px', cursor: 'pointer' }} />
