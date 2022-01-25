@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { removeTodo, completeTodo } from '../redux/actions.js';
+import { completeTodoRequest, displayAlert, loadTodos, removeTodoRequest } from '../redux/thunk.js';
 import Todo from './Todo.js';
 import TodoAdd from './TodoAdd.js';
 
-function TodoDashboard({todos, onRemovingTodo, onCompletingTodo}) {
+function TodoDashboard({ todos, onRemoveTodoRequest, onCompleteTodoRequest, onLoadingTodos }) {
+    useEffect(() => {
+        onLoadingTodos();
+    },[])
+
     let flagForCompletedTodo = 0;
     let flagForNewTodo = 0;
+
     const markupForNewTodo = () =>{
         if(todos.length === 0){
             return {__html: "<i>No task created yet.</i>"};
@@ -23,10 +29,11 @@ function TodoDashboard({todos, onRemovingTodo, onCompletingTodo}) {
     }
 
     const handleDeleteTodo = id => {
-        onRemovingTodo(id);
+        console.log(id);
+        onRemoveTodoRequest(id);
       }
       const handleCompletedTodo = id => {
-        onCompletingTodo(id);
+        onCompleteTodoRequest(id);
       }
     return (
         <div
@@ -122,7 +129,8 @@ const mapStateToProps = state => ({
 })
   
   const mapDispatchToProps = dispatch => ({
-    onRemovingTodo: id => dispatch(removeTodo(id)),
-    onCompletingTodo: id => dispatch(completeTodo(id))
+    onRemoveTodoRequest: id => dispatch(removeTodoRequest(id)),
+    onCompleteTodoRequest: id => dispatch(completeTodoRequest(id)),
+    onLoadingTodos: () => dispatch(loadTodos()),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(TodoDashboard);

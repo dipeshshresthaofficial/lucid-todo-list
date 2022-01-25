@@ -1,21 +1,16 @@
-import {CREATE_TODO, REMOVE_TODO, COMPLETE_TODO} from './actions.js';
+import {CREATE_TODO, REMOVE_TODO, COMPLETE_TODO, LOAD_TODO_SUCCESSFUL} from './actions.js';
 
 export const todos = (state=[],action)=>{
     const {type, payload} = action;
     switch(type){
         case CREATE_TODO: {
-            const {id,description} = payload;
-            const newTodo = {
-                id,
-                description,
-                isCompleted: false,
-            }
-            return state.concat(newTodo);
+            const { todo } = payload;
+            return [todo,...state];
 
         }
         case REMOVE_TODO: {
             const {id} = payload;
-            return state.filter(todo=>todo.id !==id);
+            return state.filter(todo=>todo.id !== id);
         }
         case COMPLETE_TODO: {
             const {id} = payload;
@@ -25,6 +20,10 @@ export const todos = (state=[],action)=>{
                 }
                 return todo;
             })
+        }
+        case LOAD_TODO_SUCCESSFUL:{
+            const { todos } = payload;
+            return todos;
         }
         default: {
             return state;

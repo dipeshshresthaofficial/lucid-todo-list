@@ -1,9 +1,9 @@
 import React,{useState} from 'react';
 import { connect } from 'react-redux';
 import { createTodo } from '../redux/actions';
+import { createTodoRequest } from '../redux/thunk';
 
-function TodoAdd({onAddingNewTodo}) {
-    const [cnt, setCnt] = useState(0);
+function TodoAdd({onCreatingNewTodoRequest}) {
     const [newTodo, setNewTodo] = useState('');
     const handleNewTodoDescription = (e)=>{
         // console.log(e.target.value);
@@ -13,8 +13,7 @@ function TodoAdd({onAddingNewTodo}) {
         if(newTodo.length === 0){
             alert("Todo task cannot be empty.");
         }else{
-            setCnt(cnt+1);
-            onAddingNewTodo(cnt,newTodo);
+            onCreatingNewTodoRequest(newTodo);
             setNewTodo('');
         }
     }
@@ -34,6 +33,6 @@ function TodoAdd({onAddingNewTodo}) {
     )
 }
 const mapDispatchToProps = dispatch => ({
-    onAddingNewTodo: (id,description)=>dispatch(createTodo(id,description)),
+    onCreatingNewTodoRequest: (description)=>dispatch(createTodoRequest(description)),
 })
 export default connect(null,mapDispatchToProps)(TodoAdd);
