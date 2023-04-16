@@ -1,7 +1,10 @@
 import React from 'react';
 import {TiTick,TiDelete} from 'react-icons/ti';
+import { useDispatch } from 'react-redux';
+import { completeTodo, removeTodo } from '../redux/todoSlice';
 
 export default function Todo(props) {
+    const dispatch = useDispatch();
     return (
         <div style={{ 
                 display: 'flex', 
@@ -14,15 +17,15 @@ export default function Todo(props) {
                 maxHeight: '35px'
             }}
         >
-            <p style={{ padding: "2px" }}>{props.description}</p>
-            <div style={{ fontSize: '28px' }}>
+            <p style={{ padding: "2px" }}>{props.todo.description}</p>
+            <div style={{ fontSize: '28px'}}>
                 {
-                    props.status != 'completed'? 
-                        <TiTick onClick={()=>props.handleCompletedTodo(props.index,props.description)} style={{ color: 'green', margin: '0 3px', cursor: 'pointer' }} />
+                    !props.todo.isCompleted?    
+                        <TiTick onClick={()=>dispatch(completeTodo(props.todo.id))} style={{ color: 'green', margin: '0 3px', cursor: 'pointer' }} />
                     :
                         <TiTick style={{ color: 'lightgreen', margin: '0 3px', pointerEvents: 'none'}} />
                 }
-                <TiDelete onClick={()=>props.handleDelete(props.index,props.status)} style={{ color: 'red', margin: '0 3px', cursor: 'pointer' }}/>
+                <TiDelete onClick={()=>dispatch(removeTodo(props.todo.id))} style={{ color: 'red', margin: '0 3px', cursor: 'pointer' }}/>
             </div>
         </div>
     )
